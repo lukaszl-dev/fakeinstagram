@@ -24,6 +24,7 @@ nav {
     min-height: 75px;
     background-color: rgba(249, 241, 241, 1);
     box-shadow: -1px 6px 13px 0px rgba(74, 74, 74, 0.44);
+    z-index: 999999;
     gap: 25px;
     user-select: none;
 }
@@ -111,7 +112,7 @@ header {
     margin: 10px;
 }
 
-section {
+article {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
@@ -123,7 +124,7 @@ section {
     width: 100%;
     max-width: 500px;
     height: auto;
-    min-height: 600px;
+    /* min-height: 600px; */
     background-color: rgba(249, 241, 241, 0.721);
     box-shadow: -1px 8px 13px 0px rgba(53, 53, 53, 0.44);
 }
