@@ -21,7 +21,7 @@
             <i class="fa-solid fa-magnifying-glass"></i>
         </div>
         <div class="content">
-            <div class="icons">
+            <div class="icons iconcontent">
                 <i class="fa-solid fa-house"></i>
                 <i class="fa-solid fa-paper-plane"></i>
                 <i class="fa-solid fa-plus"></i>
@@ -116,7 +116,7 @@
                 <img src="img/html-1.png" loading='lazy' alt="Post">
                 <div class="post-interact">
                     <div class="interact-icons">
-                        <i class="fa-solid fa-heart"></i>
+                        <i class="fa-regular fa-heart"></i>
                         <i class="fa-regular fa-comment"></i>
                         <i class="fa-solid fa-paper-plane"></i>
                     </div>

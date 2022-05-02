@@ -37,6 +37,12 @@ nav {
     right: 25px;
 }
 
+.iconcontent {
+    display: flex;
+    gap: 20px;
+    padding-right: 30px;
+}
+
 
 .logo {
     position: absolute;
@@ -268,10 +274,13 @@ input[name='commenti'] {
 }
 
 @media(max-width: 350px){
-    .logo {
-        opacity: 0;
-    }
     .relations {
         overflow-x: auto;
+    }
+}
+
+@media(max-width: 450px){
+    .logo {
+        opacity: 0;
     }
 }
