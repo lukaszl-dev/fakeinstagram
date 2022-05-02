@@ -88,28 +88,29 @@ header {
 
 .relations {
     display: flex;
-    flex-wrap: wrap;
+    /* flex-wrap: wrap; */
     align-items: center;
     justify-content: center;
     width: 100%;
     max-width: 500px;
-    height: auto;
-    min-height: 80px;
+    gap: 6px;
+    margin: 10px;
+    height: 100px;
     background-color: rgba(249, 241, 241, 0.721);
     box-shadow: -1px 6px 13px 0px rgba(74, 74, 74, 0.44);
     border: 1px solid rgb(202, 202, 202);
     user-select: none;
+    overflow: hidden;
 }
 
 
 .relation img{
-    width: 100%;
+    width: auto;
     max-width: 60px;
     height: auto;
     min-height: 60px;
     border-radius: 50%;
     border: 3px solid rgb(231, 100, 7);
-    margin: 10px;
 }
 
 article {
@@ -124,7 +125,7 @@ article {
     width: 100%;
     max-width: 500px;
     height: auto;
-    /* min-height: 600px; */
+    min-height: 585px;
     background-color: rgba(249, 241, 241, 0.721);
     box-shadow: -1px 8px 13px 0px rgba(53, 53, 53, 0.44);
 }
@@ -179,65 +180,78 @@ article {
 }
 
 .post-interact {
-    position: relative;
-    display: flex;
+    display: block;
     width: 100%;
     height: auto;
 }
 
 .interact-icons {
-    position: absolute;
-    left: 15px;
-    top: -50px;
     font-size: 25px;
+    padding-left: 15px;
 }
 
-.likes {
+.like {
+    margin-top: 10px;
+    padding-left: 15px;
+}
+
+.titlet {
+    margin-top: 5px;
+    padding-left: 15px;
+}
+
+.timep {
+    margin-top: 5px;
+    padding-left: 15px;
+}
+
+.comment {
+    margin-top: 25px;
+    border-top: 1px solid black;
     display: block;
-    padding: 5px;
-    margin-left: 18px;
-}
-
-.titlep {
-    position: absolute;
-    padding-top: 35px;
-    margin-left: 23px;
-}
-
-.time {
-    position: absolute;
-    padding-top: 62px;
-    margin-left: 23px;
-}
-
-.coment {
-    display: flex;
-    align-items: center;
-    margin-top: 65px;
-    width: 100%;
-    height: auto;
-    min-height: 50px;
-    border-top: 1px solid rgb(173, 169, 169);
-    position: relative;
 }
 
 .comment-emoji {
-    position: absolute;
-    font-size: 30px;
-    left: 10px;
+    font-size: 25px;
 }
 
+.fa-face-grin {
+    margin-top: 5px;
+    margin-left: 5px;
+    font-size: 30px;
+    float: left;
+}
+
+.commentnumber {
+    margin-top: 5px;
+    padding-left: 15px;
+}
+
+
 .comment-text {
-    position: absolute;
-    left: 50px;
+    float: left;
+    width: 75%;
+    margin-top: 2px;
+    margin-left: 5px;
 }
 
 .comment-send {
-    position: absolute;
-    right: 15px;
-    color: rgb(20, 168, 222);
+    float: left;
+    margin-top: 7px;
     font-weight: 600;
     font-size: 17px;
+    padding-left: 2px;
+    color: rgb(20, 168, 222);
+}
+
+
+input[name='commenti'] {
+    background-color: rgba(249, 241, 241, 0.721);
+    width: 100%;
+    height: auto;
+    outline: none;
+    border: none;
+    font-size: 16px;
 }
 
 @media(max-width: 900px){
@@ -245,10 +259,19 @@ article {
         display: none;
         opacity: 0;
     }
+    .comment-text {
+        width: 65%;
+    }
+    .box {
+        min-height: 545px;
+    }
 }
 
-@media(max-width: 300px){
+@media(max-width: 350px){
     .logo {
         opacity: 0;
+    }
+    .relations {
+        overflow-x: auto;
     }
 }

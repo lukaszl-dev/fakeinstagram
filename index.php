@@ -1,3 +1,6 @@
+<?php
+  session_start();
+?>
 <!DOCTYPE html>
 <html lang="pl-PL">
 <head>
@@ -30,52 +33,120 @@
     </nav>
     <header>
         <div class="relations">
-            <div class="relation"><img src="img/html-1.png" alt="Relacja 1"></div>
-            <div class="relation"><img src="img/html-1.png" alt="Relacja 2"></div>
-            <div class="relation"><img src="img/html-1.png" alt="Relacja 3"></div>
-            <div class="relation"><img src="img/html-1.png" alt="Relacja 4"></div>
-            <div class="relation"><img src="img/html-1.png" alt="Relacja 5"></div>
+            <div class="relation"><img src="img/html-1.png" loading='lazy' alt="Relacja 1"></div>
+            <div class="relation"><img src="img/html-1.png" loading='lazy' alt="Relacja 2"></div>
+            <div class="relation"><img src="img/html-1.png" loading='lazy' alt="Relacja 3"></div>
+            <div class="relation"><img src="img/html-1.png" loading='lazy' alt="Relacja 4"></div>
+            <div class="relation"><img src="img/html-1.png" loading='lazy' alt="Relacja 5"></div>
         </div>
     </header>
-    <section>
+    <?php
+        $db = new mysqli('localhost', 'root', '', 'fakeinstagram');
+        $sql = "SELECT * FROM posts  ORDER BY timestamp DESC";
+        $result = $db->query($sql);
+        while($row = $result->fetch_assoc()) {
+            /* Convert date */
+            $phpdate = strtotime($row["timestamp"]);
+            $data = date("H:i d.m.Y", $phpdate);
+            /* Write Article's */
+            echo '<article> 
+                <div class="box">
+                    <div class="people">
+                        <div class="people-img"><img src="img/html-1.png" loading="lazy" alt="Relacja 1"></div> 
+                        <div class="people-title">'.$row['author'].'</div>
+                        <div class="people-interact">...</div>
+                    </div>
+                    <div class="post-img">
+                        <img src="'.$row["img"].'" loading="lazy" alt="Post">
+                        <div class="post-interact">
+                            <div class="interact-icons">
+                                <i class="fa-solid fa-heart"></i>
+                                <i class="fa-regular fa-comment"></i>
+                                <i class="fa-solid fa-paper-plane"></i>
+                            </div>
+                            <div>
+                                <p class="like">Lubi to '.$row["likes"].' użytkowników!</p>
+                            </div>
+                            <div>
+                                <p class="titlet"><strong>'.$row["author"].':</strong> No to w drogę...</p>
+                            </div> 
+                            <div>
+                                <p class="timep">'.$data.'</p>
+                            </div>
+                            <div> 
+                                <p class="commentnumber"> Liczba komentarzy: ';
+                            // Get number of comments 
+                            $sql2 = "SELECT * FROM comments";
+                            $resultt = $db->query($sql2);
+                            $ilosc = 0;
+                            while($row2 = $resultt->fetch_assoc()) {
+                                if($row2['id'] == $row['id']){
+                                    $ilosc = mysqli_num_rows($resultt);
+                                    echo $ilosc;
+                                }
+                            }
+                            echo '</div>
+                            </div>
+                        </div>
+                        <div class="comment">
+                            <div class="comment-emoji">
+                                <i class="fa-regular fa-face-grin"></i>
+                                <div class="comment-text">
+                                    <input type="text" name="commenti" placeholder="Dodaj komentarz...">
+                                </div>
+                                <div class="comment-send">
+                                    Opublikuj
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </article>';
+        }
+        $db -> close();
+    ?>
+    <article>
         <div class="box">
             <div class="people">
-                <div class="people-img"><img src="img/html-1.png" alt="Relacja 1"></div> 
+                <div class="people-img"><img src="img/html-1.png" loading='lazy' alt="Relacja 1"></div> 
                 <div class="people-title">Łukasz Ligocki</div>
                 <div class="people-interact">...</div>
             </div>
             <div class="post-img">
-                <img src="img/html-1.png" alt="Post">
-            </div>
-            <div class="post-interact">
-                <div class="interact-icons">
-                    <i class="fa-solid fa-heart"></i>
-                    <i class="fa-regular fa-comment"></i>
-                    <i class="fa-solid fa-paper-plane"></i>
+                <img src="img/html-1.png" loading='lazy' alt="Post">
+                <div class="post-interact">
+                    <div class="interact-icons">
+                        <i class="fa-solid fa-heart"></i>
+                        <i class="fa-regular fa-comment"></i>
+                        <i class="fa-solid fa-paper-plane"></i>
+                    </div>
+                    <div>
+                        <p class="like">Lubi to 10 użytkowników!</p>
+                    </div>
+                    <div>
+                        <p class="titlet"><strong>Łukasz Ligocki:</strong> No to w drogę...</p>
+                    </div> 
+                    <div>
+                        <p class="timep">10:19 02.05.2022</p>
+                    </div>
+                    <div> 
+                        <p class="commentnumber"> Liczba komentarzy: 0
+                    </div>
                 </div>
-                <div class="likes">
-                    Lubi to 10 użytkowników!
-                </div>
-                <div class="titlep">
-                    <strong>Łukasz Ligocki</strong> No to w drogę...
-                </div>
-                <div class="time">
-                    6 Godzin temu
-                </div>
-            </div>
-            <div class="coment">
-                <div class="comment-emoji">
-                    <i class="fa-regular fa-face-grin"></i>
-                </div>
-                <div class="comment-text">
-                    Dodaj komentarz...
-                </div>
-                <div class="comment-send">
-                    Opublikuj
+                <div class="comment">
+                    <div class="comment-emoji">
+                        <i class="fa-regular fa-face-grin"></i>
+                        <div class="comment-text">
+                            <input type='text' name='commenti' placeholder='Dodaj komentarz...'>
+                        </div>
+                        <div class="comment-send">
+                            Opublikuj
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-    </section>
+    </article>
     <script src="script.js"></script>
 </body>
 </html> 
