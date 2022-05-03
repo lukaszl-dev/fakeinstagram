@@ -50,7 +50,7 @@
             $data = date("H:i d.m.Y", $phpdate);
             /* Write Article's */
             echo '<article> 
-                <div class="box">
+                <div class="box" id="'.$row["id"].'">
                     <div class="people">
                         <div class="people-img"><img src="img/html-1.png" loading="lazy" alt="Relacja 1"></div> 
                         <div class="people-title">'.$row['author'].'</div>
@@ -60,7 +60,7 @@
                         <img src="'.$row["img"].'" loading="lazy" alt="Post">
                         <div class="post-interact">
                             <div class="interact-icons">
-                                <i class="fa-solid fa-heart"></i>
+                                <i class="fa-regular fa-heart"></i>
                                 <i class="fa-regular fa-comment"></i>
                                 <i class="fa-solid fa-paper-plane"></i>
                             </div>
@@ -74,7 +74,7 @@
                                 <p class="timep">'.$data.'</p>
                             </div>
                             <div> 
-                                <p class="commentnumber"> Liczba komentarzy: ';
+                                ';
                             // Get number of comments 
                             $sql2 = "SELECT * FROM comments";
                             $resultt = $db->query($sql2);
@@ -82,7 +82,7 @@
                             while($row2 = $resultt->fetch_assoc()) {
                                 if($row2['id'] == $row['id']){
                                     $ilosc = mysqli_num_rows($resultt);
-                                    echo $ilosc;
+                                    echo '<p class="commentnumber" style="cursor: pointer; user-select: none;" onclick="showcomment('.$row["id"].');"> Liczba komentarzy: '.$ilosc;
                                 }
                             }
                             echo '</div>
@@ -130,7 +130,7 @@
                         <p class="timep">10:19 02.05.2022</p>
                     </div>
                     <div> 
-                        <p class="commentnumber"> Liczba komentarzy: 0
+                        <p class="commentnumber" style="cursor: pointer;"> Liczba komentarzy: 0
                     </div>
                 </div>
                 <div class="comment">
@@ -147,6 +147,34 @@
             </div>
         </div>
     </article>
-    <script src="script.js"></script>
+    <script>
+        function showcomment(id){
+            if(document.getElementById(id).style.height == "750px"){
+                document.getElementById(id).style.height = "585px";
+                document.getElementById(id).innerHTML += '';
+                const elements = document.querySelectorAll(".comments");
+                elements.forEach(function (element) {
+                    element.remove();
+                    element.style.opacity = 0;
+                });
+            }else{
+                document.getElementById(id).style.height = "750px";
+                document.getElementById(id).innerHTML += ('<?php
+                    $db = new mysqli('localhost', 'root', '', 'fakeinstagram');
+                    $sql2 = "SELECT * FROM comments";
+                    $resultt = $db->query($sql2);
+                    $ilosc = 0;
+                    while($row2 = $resultt->fetch_assoc()) {
+                        echo '<div class="comments">'.$row2['author'].': '.$row2['tresc'].'</div>';
+                    }
+                    $db -> close();
+                ?>');
+                const elements = document.querySelectorAll(".comments");
+                elements.forEach(function (element) {
+                    element.style.opacity = 1;
+                });
+            }
+        }
+    </script>
 </body>
 </html> 

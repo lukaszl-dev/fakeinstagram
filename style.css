@@ -212,6 +212,8 @@ article {
 }
 
 .comment {
+    width: 100%;
+    height: 40px;
     margin-top: 25px;
     border-top: 1px solid black;
     display: block;
@@ -251,6 +253,7 @@ article {
 }
 
 
+
 input[name='commenti'] {
     background-color: rgba(249, 241, 241, 0.721);
     width: 100%;
@@ -258,6 +261,14 @@ input[name='commenti'] {
     outline: none;
     border: none;
     font-size: 16px;
+}
+
+.comments {
+    padding: 5px;
+    display: block;
+    width: 85%;
+    height: auto;
+    opacity: 0;
 }
 
 @media(max-width: 900px){
