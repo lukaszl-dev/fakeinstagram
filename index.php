@@ -148,17 +148,17 @@
         </div>
     </article>
     <script>
+        click = false;
         function showcomment(id){
-            if(document.getElementById(id).style.height == "750px"){
-                document.getElementById(id).style.height = "585px";
-                document.getElementById(id).innerHTML += '';
+            if(click){
                 const elements = document.querySelectorAll(".comments");
                 elements.forEach(function (element) {
                     element.remove();
                     element.style.opacity = 0;
+                    click = false;
                 });
             }else{
-                document.getElementById(id).style.height = "750px";
+                click = true;
                 document.getElementById(id).innerHTML += ('<?php
                     $db = new mysqli('localhost', 'root', '', 'fakeinstagram');
                     $sql2 = "SELECT * FROM comments";

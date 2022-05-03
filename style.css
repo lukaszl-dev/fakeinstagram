@@ -131,7 +131,7 @@ article {
     width: 100%;
     max-width: 500px;
     height: auto;
-    min-height: 585px;
+    /* min-height: 585px; */
     background-color: rgba(249, 241, 241, 0.721);
     box-shadow: -1px 8px 13px 0px rgba(53, 53, 53, 0.44);
 }
