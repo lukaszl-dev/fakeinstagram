@@ -15,7 +15,7 @@
 </head>
 <body>
     <nav>
-        <div class="content logo">Instagram</div>
+        <div class="content logo"><a href='index.php'>Instagram</a></div>
         <div class="content">
             <input class="look" name='search' type="text" placeholder='Szukaj'>
             <i class="fa-solid fa-magnifying-glass"></i>
@@ -60,7 +60,7 @@
                         <img src="'.$row["img"].'" loading="lazy" alt="Post">
                         <div class="post-interact">
                             <div class="interact-icons">
-                                <i class="fa-regular fa-heart"></i>
+                                <i class="fa-regular fa-heart likeit"></i>
                                 <i class="fa-regular fa-comment"></i>
                                 <i class="fa-solid fa-paper-plane"></i>
                             </div>
@@ -68,7 +68,7 @@
                                 <p class="like">Lubi to '.$row["likes"].' użytkowników!</p>
                             </div>
                             <div>
-                                <p class="titlet"><strong>'.$row["author"].':</strong> No to w drogę...</p>
+                                <p class="titlet"><b>'.$row["author"].':</b> No to w drogę...</p>
                             </div> 
                             <div>
                                 <p class="timep">'.$data.'</p>
@@ -82,7 +82,7 @@
                             while($row2 = $resultt->fetch_assoc()) {
                                 if($row2['id'] == $row['id']){
                                     $ilosc = mysqli_num_rows($resultt);
-                                    echo '<p class="commentnumber" style="cursor: pointer; user-select: none;" onclick="showcomment('.$row["id"].');"> Liczba komentarzy: '.$ilosc;
+                                    echo '<p class="commentnumber" style="cursor: pointer; user-select: none;" onclick="showComment('.$row["id"].');"> Liczba komentarzy: '.$ilosc;
                                 }
                             }
                             echo '</div>
@@ -91,12 +91,14 @@
                         <div class="comment">
                             <div class="comment-emoji">
                                 <i class="fa-regular fa-face-grin"></i>
-                                <div class="comment-text">
-                                    <input type="text" name="commenti" placeholder="Dodaj komentarz...">
-                                </div>
-                                <div class="comment-send">
-                                    Opublikuj
-                                </div>
+                                <form method="post">
+                                    <div class="comment-text">
+                                        <input type="text" name="commenti" placeholder="Dodaj komentarz...">
+                                    </div>
+                                    <div class="comment-send">
+                                        <input type="submit" value="Opublikuj">
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -116,7 +118,7 @@
                 <img src="img/html-1.png" loading='lazy' alt="Post">
                 <div class="post-interact">
                     <div class="interact-icons">
-                        <i class="fa-regular fa-heart"></i>
+                        <i class="fa-regular fa-heart likeit" onclick=addLike();></i>
                         <i class="fa-regular fa-comment"></i>
                         <i class="fa-solid fa-paper-plane"></i>
                     </div>
@@ -136,25 +138,26 @@
                 <div class="comment">
                     <div class="comment-emoji">
                         <i class="fa-regular fa-face-grin"></i>
-                        <div class="comment-text">
-                            <input type='text' name='commenti' placeholder='Dodaj komentarz...'>
-                        </div>
-                        <div class="comment-send">
-                            Opublikuj
-                        </div>
+                        <form method="post">
+                            <div class="comment-text">
+                                <input type="text" name="commenti" placeholder="Dodaj komentarz...">
+                            </div>
+                            <div class="comment-send">
+                                <input type="submit" value="Opublikuj">
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
     </article>
     <script>
-        click = false;
-        function showcomment(id){
+        let click = false;
+        let showComment = (id) => {
             if(click){
                 const elements = document.querySelectorAll(".comments");
                 elements.forEach(function (element) {
                     element.remove();
-                    element.style.opacity = 0;
                     click = false;
                 });
             }else{
@@ -165,15 +168,24 @@
                     $resultt = $db->query($sql2);
                     $ilosc = 0;
                     while($row2 = $resultt->fetch_assoc()) {
-                        echo '<div class="comments">'.$row2['author'].': '.$row2['tresc'].'</div>';
+                        echo '<div class="comments"><b>'.$row2['author'].':</b> '.$row2['tresc'].'</div>';
                     }
                     $db -> close();
                 ?>');
-                const elements = document.querySelectorAll(".comments");
-                elements.forEach(function (element) {
-                    element.style.opacity = 1;
-                });
             }
+        }
+
+        let addLike = () => {
+            const hearth = document.querySelectorAll('.likeit');
+
+            hearth.forEach(function (element) {
+                if(element.className == 'added'){
+                    console.log('xd');
+                    element.classList.remove('added');
+                }else{
+                    element.classList.add('added');
+                }
+            });
         }
     </script>
 </body>
