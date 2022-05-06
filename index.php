@@ -164,11 +164,11 @@
                 click = true;
                 document.getElementById(id).innerHTML += ('<?php
                     $db = new mysqli('localhost', 'root', '', 'fakeinstagram');
-                    $sql2 = "SELECT * FROM comments";
-                    $resultt = $db->query($sql2);
+                    $sql = "SELECT * FROM comments";
+                    $result = $db->query($sql);
                     $ilosc = 0;
-                    while($row2 = $resultt->fetch_assoc()) {
-                        echo '<div class="comments"><b>'.$row2['author'].':</b> '.$row2['tresc'].'</div>';
+                    while($row = $result->fetch_assoc()) {
+                        echo '<div class="comments"><b>'.$row['author'].':</b> '.$row['tresc'].'</div>';
                     }
                     $db -> close();
                 ?>');
